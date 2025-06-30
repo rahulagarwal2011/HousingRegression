@@ -3,13 +3,17 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.model_selection import train_test_split, GridSearchCV
 import numpy as np
 
+
 df = load_data()
+
+
+results = []
 
 
 param_grids = {
     'LinearRegression': {
         'fit_intercept': [True, False],
-        'normalize': [True, False],  
+        'positive': [True, False],  
         'n_jobs': [None, -1]
     },
     'Ridge': {
@@ -78,8 +82,23 @@ for name, model in models.items():
             best_model = current_model
             best_mse = mse
 
-    print(f"\n✅ Best configuration for {name}:")
+   
+    print(f"\n---------Best configuration for {name}:")
     print(f"Best Dev Size: {best_dev_size}")
     if param_grids.get(name, {}):
         print(f"Best Hyperparameters: {best_model.get_params()}")
     print(f"Best R² Score: {best_score:.4f}, Best MSE: {best_mse:.4f}")
+
+   
+    results.append({
+        'Model': name,
+        'Best Dev Size': best_dev_size,
+        'Best Hyperparameters': best_model.get_params() if param_grids.get(name, {}) else '-',
+        'MSE': round(best_mse, 2),
+        'R2': round(best_score, 2)
+    })
+
+
+print("\n=== 📊 Performance Comparison Summary ===")
+for res in results:
+    print(f"{res['Model']:20} | Dev Size: {res['Best Dev Size']} | MSE: {res['MSE']} | R2: {res['R2']} \nBest Params: {res['Best Hyperparameters']}\n")
