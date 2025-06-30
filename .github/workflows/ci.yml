@@ -3,7 +3,7 @@ name: Regression Workflow (reg_branch)
 on:
   push:
     branches:
-      - reg
+      - reg_branch
 
 jobs:
   build:
