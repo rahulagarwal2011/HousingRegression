@@ -1,9 +1,9 @@
-name: Regression Workflow (reg_branch)
+name: Regression Workflow (hyper_branch)
 
 on:
   push:
     branches:
-      - reg_branch
+      - hyper_branch
 
 jobs:
   build:
@@ -22,5 +22,5 @@ jobs:
       run: |
         pip install --no-cache-dir -r requirements.txt
 
-    - name: Run regression script
+    - name: Run regression script with hyperparameter tuning
       run: python regression.py
