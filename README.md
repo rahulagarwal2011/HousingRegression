@@ -11,3 +11,11 @@ Predict Boston housing prices using Linear Regression, Ridge, and Lasso models, 
 ```bash
 git clone git@github.com:raagarwal2011/HousingRegression.git
 cd HousingRegression
+
+HousingRegression/
+│-- .github/workflows/
+│    └── ci.yml
+│-- utils.py
+│-- regression.py
+│-- requirements.txt
+│-- README.md
